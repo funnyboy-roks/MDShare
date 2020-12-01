@@ -22,15 +22,12 @@
 </head>
 <body>
     <div id="content"></div>
-    <!-- <button onclick="location.pathname. = '/edit'">Edit</button> -->
     <a href="/edit/" id="button">Edit</a>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         if(location.hash.length > 1){
             document.getElementById('content').innerHTML = marked(atob(location.hash.substr(1)));
             document.querySelector('a#button').href = './edit/' + location.hash;
-        }else{
-            location.pathname = '/edit'
         }
     </script>
 </body>
