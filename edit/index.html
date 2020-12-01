@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Markdown</title>
+    <style>
+        body {
+            height: 97vh;
+        }
+
+        textarea {
+            margin-top: 1.5em;
+            width: 100%;
+            height: 100%;
+        }
+
+        button {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #share-urll{
+            position: absolute;
+            top: 0;
+            left: 5em;
+        }
+        #share-url{
+            width: 30em;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="location.pathname = ''">View</button>
+    <label id="share-urll">Share URL: <input type="text" id="share-url" readonly></label>
+    <textarea name="markdown" id="markdown"># Markdown Goes Here!</textarea>
+    <script>
+        window.onload = () => {
+            if(location.hash.length > 1){
+                document.querySelector('#markdown').value = atob(location.hash.substr(1))    
+                document.querySelector('#share-url').value = location.origin + '/' + location.hash;
+            }
+        }
+        document.querySelector('#markdown').addEventListener('input', () => {
+            location.hash = btoa(document.querySelector('#markdown').value)
+            document.querySelector('#share-url').value = location.origin + '/' + location.hash;
+        })
+    </script>
+</body>
+
+</html>
