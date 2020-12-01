@@ -1,34 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markdown Sharing</title>
-    <style>
-        body{
-            height: 100vh;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+        <title>MDShare</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.4.1/dist/css/bootstrap-grid.min.css,npm/slim-select@1.25.0/dist/slimselect.min.css,npm/codemirror@5.58.1/lib/codemirror.min.css,npm/codemirror@5.58.1/addon/scroll/simplescrollbars.css,npm/codemirror@5.58.1/theme/dracula.min.css,npm/microtip@0.2.2/microtip.min.css">
+        <link rel="stylesheet" href="./NoPaste/style.css">
+        <link rel="stylesheet" href="home.css">
+        <link href="favicon.ico" rel="icon" type="image/x-icon">
+        <link rel="canonical" href="https://funnyboyroks.com/MDShare/edit">
+        <meta name="description" property="og:description" content="MDShare is a front-end markdown page sharing service. The data is stored entirely in the links and nowhere else">
+        <meta property="og:title" content="MDShare - No-database Markdown share service">
+        <!-- <meta property="og:image" content="https://cdn.jsdelivr.net/gh/bokub/nopaste@images/logo.png"> -->
+        <meta property="og:url" content="https://funnyboyroks.com/MDShare/edit">
+        <meta property="og:type" content="website">
+    </head>
+    
+    <body class="m-0">
+        <div id="copy" class="container-fluid hidden shadow-bottom hide-readonly">
+            <div class="row my-1">
+                <div class="col my-1">
+                    <input type="text" value="copy me" id="copy-link" class="px-2"
+                        onclick="this.setSelectionRange(0, this.value.length)">
+                </div>
+                <div class="col-auto my-1">
+                    <button class="clipboard py-1 px-2 mx-1" id="copy-btn" data-clipboard-target="#copy-link" type="button">
+                        Copy
+                    </button>
+                    <button class="py-1 px-2 mx-1" onclick="hideCopyBar(false)" type="button">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div id="controls" class="container-fluid shadow-bottom hide-readonly">
+            <div class="row align-items-center justify-content-end my-1">
+                <div class="col-auto mb-1">
+                    <h1 class="my-0"><span>{</span> MDShare <span>}</span></h1>
+                </div>
+                <div class="col-auto">
+                    <a href="./edit/" id="edit-md" class="mx-3" aria-label="Edit Markdown" data-microtip-position="bottom" role="tooltip">Edit</a>
+                    <a href="https://nopaste.ml" rel="noopener" class="mx-3" aria-label="Click to view NoPaste website" data-microtip-position="bottom" >NoPaste</a>
+                    <a href="https://github.com/funnyboy-roks/MDShare" rel="noopener" class="mx-3" aria-label="Click to view source" data-microtip-position="bottom" >Source</a>
+                </div>
+                <div class="col"></div>
+                <div class="col-auto">
+                    <!-- <button class="py-1 px-2 mx-0 my-1" onclick="generateLink('url')" type="button">
+                        Generate link
+                    </button>
+                    <button class="py-1 px-2 mx-1 my-1" onclick="generateLink('markdown')" type="button">
+                        Generate markdown
+                    </button> -->
+                    <button class="py-1 px-2 mx-0 my-1" onclick="showCopyBar(location.href);" type="button">Share Markdown</button>
+                </div>
+            </div>
+        </div>
 
-        #content{
-            height: 100%;
-        }
-
-        a#button{
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-    </style>
-</head>
-<body>
     <div id="content"></div>
-    <a href="./edit/" id="button">Edit</a>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script>
-        if(location.hash.length > 1){
-            document.getElementById('content').innerHTML = marked(atob(location.hash.substr(1)));
-            document.querySelector('a#button').href = './edit/' + location.hash;
-        }
-    </script>
+    <script src="home.js"></script>
 </body>
 </html>
