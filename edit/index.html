@@ -34,19 +34,23 @@
 </head>
 
 <body>
-    <button onclick="location.pathname = ''">View</button>
+    <!-- <button onclick="location.pathname = ''">View</button> -->
+    <a href="./" id="button">View</a>
     <label id="share-urll">Share URL: <input type="text" id="share-url" readonly></label>
     <textarea name="markdown" id="markdown"># Markdown Goes Here!</textarea>
     <script>
         window.onload = () => {
             if(location.hash.length > 1){
                 document.querySelector('#markdown').value = atob(location.hash.substr(1))    
+                location.hash = btoa(document.querySelector('#markdown').value)
                 document.querySelector('#share-url').value = location.origin + '/' + location.hash;
+            document.querySelector('a#button').href = '../' + location.hash;
             }
         }
         document.querySelector('#markdown').addEventListener('input', () => {
             location.hash = btoa(document.querySelector('#markdown').value)
             document.querySelector('#share-url').value = location.origin + '/' + location.hash;
+            document.querySelector('a#button').href = '../' + location.hash;
         })
     </script>
 </body>
